@@ -2,7 +2,21 @@ module Shireen exposing (..)
 import GraphicSVG exposing (..)
 import GraphicSVG.App exposing (..)
 import GraphicSVG.Secret exposing (..)
--- Your shapes go here!
+
+
+type Msg = Tick Float GetKeyState
+
+type alias Model = { time : Float }
+
+init = { time = 0 }
+
+update msg model =
+  case msg of
+    Tick t _ -> { model | time = t }
+
+view model = collage 192 128 (myShapes model)
+
+main = gameApp Tick { model = init, view = view, update = update, title = "Starfish" }
 myShapes model =
   [
     cecilia
